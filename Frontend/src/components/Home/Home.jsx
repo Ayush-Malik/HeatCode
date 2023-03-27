@@ -174,7 +174,7 @@ export default function Home() {
                                     </Typography>
                                 </AccordionDetails>
                             </Accordion>
-                            <Accordion className="faq_accord" expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                            <Accordion className="faq_accord" expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                                 <AccordionSummary expandIcon={<MdExpandMore className="accord_icon" />} >
                                     <Typography className="accord_head">
                                         Q: As a student, how do I participate in a contest?
