@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+$font-family: 'Questrial', sans-serif;
+$color: #74DBEF;
+
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #181818;
+    color: #ffffff;
+}
+
+// login container
+.login{
+    margin-top: 20px;
+
+    // navbar
+    .login_nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .nav_logo{
+            display: flex;
+            align-items: center;
+            font-family: $font-family;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+
+            img{
+                width: 40px;
+                margin-right: 10px;
+            }
+
+            &:hover{
+                color: $color;
+                transform: scale(1.04);
+            }
+
+            @media screen and (max-width: 485px) {
+                font-size: 0.7rem;
+            }
+        }
+
+        .button-div{
+
+            .nav_btn{
+                font-family: $font-family;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #ffffff;
+                background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
+                backdrop-filter: blur(20px);
+                border-radius: 10px;
+                padding: 14px 30px;
+                transition:  0.2s ease-in-out;
+    
+                &:hover{
+                    background: linear-gradient(125.7deg,hsla(0,0%,100%,.25) 25.43%,hsla(0,0%,100%,.15) 74.38%);
+                    transform: scale(1.04);
+                }
+    
+                @media screen and (max-width: 485px) {
+                    font-size: 0.7rem;
+                    padding: 10px 20px;
+                }
+            }
+        }
+
+        .nav_btn:first-child{
+            margin-right: 20px;
+        }
+
+        @media screen and (max-width: 485px) {
+            .nav_btn{
+                font-size: 0.7rem;
+                padding: 10px 20px;
+            }
+
+            .nav_btn:first-child{
+                margin-right: 10px;
+            }
+        }
+
+        @media screen and (max-width: 355px) {
+            .button-div{
+                display: flex;
+                flex-direction: column;
+            }
+
+            .nav_btn{
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    // form
+    .login_form{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        animation: fanimate 1s ease-in-out;
+
+        @keyframes fanimate{
+            0%{
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            100%{
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+
+        .form_left{
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            img{
+                width: 500px;
+            }
+
+            h2{
+                font-family: $font-family;
+                font-size: 1.8rem;
+                width: 70%;
+                font-weight: 600;
+                margin-bottom: 25px;
+                background: linear-gradient(283.41deg, $color, #3b87ce);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .form_l_btn{
+                font-family: $font-family;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #ffffff;
+                background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
+                backdrop-filter: blur(20px);
+                border-radius: 10px;
+                padding: 14px 30px;
+                transition:  0.2s ease-in-out;
+                margin-bottom: 20px;
+    
+                &:hover{
+                    background: linear-gradient(125.7deg,hsla(0,0%,100%,.25) 25.43%,hsla(0,0%,100%,.15) 74.38%);
+                    transform: scale(1.04);
+                }
+            }
+        }
+
+        .form_right{
+            width: 50%;
+
+            h2{
+                font-family: $font-family;
+                background: linear-gradient(283.41deg, $color, #3b87ce);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                font-size: 2.5rem;
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+
+            p{
+                font-family: $font-family;
+                font-size: 1rem;
+                font-weight: 500;
+                margin-bottom: 30px;
+            }
+
+            .form_control{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 20px;
+
+                .form_input{
+                    margin-bottom: 20px;
+
+                    label{
+                        font-family: $font-family;
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                        color: #3b87ce;
+                    }
+
+                    input{
+                        font-family: $font-family;
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                        background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
+                        backdrop-filter: blur(20px);
+                        color: #ffffff;
+                        border-radius: 10px;
+                    }
+
+                    input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                    input[type=number] {
+                        -moz-appearance: textfield;
+                    }
+                }
+
+                .form_btn{
+                    font-family: $font-family;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    width: 200px;
+                    color: #ffffff;
+                    background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
+                    backdrop-filter: blur(20px);
+                    border-radius: 10px;
+                    padding: 14px 30px;
+                    transition:  0.2s ease-in-out;
+        
+                    &:hover{
+                        background: linear-gradient(125.7deg,hsla(0,0%,100%,.25) 25.43%,hsla(0,0%,100%,.15) 74.38%);
+                        transform: scale(1.04);
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 1025px) {
+            .form_left{
+                width: 50%;
+
+                img{
+                    width: 400px;
+                }
+            }
+
+            .form_right{
+                width: 40%;
+
+                h2{
+                    font-size: 2rem;
+                }
+
+                p{
+                    font-size: 0.8rem;
+                }
+
+                .form_control{
+                    .form_input{
+                        label{
+                            font-size: 1rem;
+                        }
+
+                        input{
+                            font-size: 1rem;
+                        }
+                    }
+
+                    .form_btn{
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 668px) {
+            .form_left{
+                width: 100%;
+
+                img{
+                    width: 240px;
+                }
+
+                h2{
+                    font-size: 1.5rem;
+                    width: 100%;
+                }
+
+                .form_l_btn{
+                    font-size: 0.8rem;
+                    padding: 10px 20px;
+                }
+            }
+
+            .form_right{
+                width: 100%;
+
+                h2{
+                    font-size: 1.5rem;
+                }
+
+                p{
+                    font-size: 0.8rem;
+                }
+
+                .form_control{
+                    .form_input{
+                        label{
+                            font-size: 0.8rem;
+                        }
+
+                        input{
+                            font-size: 0.8rem;
+                        }
+                    }
+
+                    .form_btn{
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 570px) {
+            flex-direction: column;
+        }
+    }
+}
