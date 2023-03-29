@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 import { Container, Button, Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import { BsCheck } from "react-icons/bs";
 import { MdExpandMore } from "react-icons/md";
@@ -20,6 +21,7 @@ import "./Home.scss";
 
 export default function Home() {
 
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [expanded, setExpanded] = useState(false);
 
@@ -54,7 +56,7 @@ export default function Home() {
                             <img src={logo} alt="HeatCode Logo" />
                             <h1>HeatCode</h1>
                         </div>
-                        <Button className="nav_btn">
+                        <Button className="nav_btn" onClick={() => navigate("/signup")}>
                             Get Started
                         </Button>
                     </Container>
@@ -64,7 +66,7 @@ export default function Home() {
                         <div className="header_body">
                             <h1>#Welcome to HeatCode!</h1>
                             <p>Heating up the competition, one code at a time</p>
-                            <Button className="header_btn">
+                            <Button className="header_btn" onClick={() => navigate("/signup")}>
                                 Create account
                             </Button>
                         </div>
@@ -174,7 +176,7 @@ export default function Home() {
                                     </Typography>
                                 </AccordionDetails>
                             </Accordion>
-                            <Accordion className="faq_accord" expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                            <Accordion className="faq_accord" expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                                 <AccordionSummary expandIcon={<MdExpandMore className="accord_icon" />} >
                                     <Typography className="accord_head">
                                         Q: As a student, how do I participate in a contest?
