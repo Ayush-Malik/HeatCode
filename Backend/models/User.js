@@ -74,7 +74,8 @@ User.beforeSave(async(user, options) => {
 
 User.prototype.isPasswordCorrect = async function(password) {
     try {
-        return await bcrypt.compare(password, this.password);
+        const isCorrect = await bcrypt.compare(password, this.password);
+        return isCorrect;
     } catch (error) {
         throw new Error(error);
     }
