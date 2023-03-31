@@ -1,7 +1,8 @@
 const { StatusCodes } = require("http-status-codes");
-const { body, validationResult } = require("express-validator");
+const { body, query, validationResult } = require("express-validator");
 const { sequelize, User, InstituteDetail } = require("../models");
 const customError = require("../errors");
+const crypto = require("crypto");
 
 const registerStudent = [
     body("name").notEmpty().withMessage("Name is required"),
@@ -38,7 +39,7 @@ const registerStudent = [
             email,
             password,
             role,
-            verificationToken: "maiTokenHu",
+            verificationToken: crypto.randomBytes(40).toString("hex"),
         };
         const { dataValues: user } = await User.create(newUser);
 
@@ -103,7 +104,7 @@ const registerInstitute = [
             email,
             password,
             role,
-            verificationToken: "maiTokenHu",
+            verificationToken: crypto.randomBytes(40).toString("hex"),
         };
         const { dataValues: user } = await User.create(newUser);
 
@@ -121,6 +122,40 @@ const registerInstitute = [
             msg: "Institute User created successfully!!!",
             verificationToken: user.verificationToken,
         });
+    },
+];
+
+// ------------------------------------------------------------------------------------
+
+const verifyEmail = [
+    query("email")
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Invalid email format"),
+
+    query("verificationToken")
+    .notEmpty()
+    .withMessage("Please provide verification token"),
+    async(req, res, next) => {
+        // user existence check
+        const user = await User.findOne({ where: { email: req.query.email } });
+        if (!user) {
+            throw new customError.UnauthenticatedError("Invalid Credentials");
+        }
+
+        // token check
+        if (user.verificationToken !== req.query.verificationToken) {
+            throw new customError.UnauthenticatedError("Verification failed");
+        }
+
+        // verify
+        user.isVerified = true;
+        user.verifiedOn = Date.now();
+        user.verificationToken = "";
+        await user.save(); // so that no one can login using verification email more than once
+
+        res.status(StatusCodes.OK).json({ "msg": "User verified Successfully!!!" });
     },
 ];
 
@@ -148,26 +183,24 @@ const login = [
             throw new customError.ValidationError("Validation failded!!!", errors);
         }
 
-        console.log(req);
+        // user existence check
         const user = await User.findOne({ where: { email: req.body.email } });
-
         if (!user) {
             throw new customError.UnauthenticatedError("Invalid Credentials");
         }
 
+        // password check
         const isCorrect = await user.isPasswordCorrect(req.body.password);
-
         if (!isCorrect) {
             throw new customError.UnauthenticatedError("Invalid Credentials");
         }
 
+        // user verification check
         if (!user.isVerified) {
             throw new customError.UnauthenticatedError(
                 "Unverified account , Please verify your email"
             );
         }
-
-        console.log(user);
 
         res.send("login route");
     },
@@ -182,6 +215,7 @@ const logout = async(req, res, next) => {
 module.exports = {
     registerStudent,
     registerInstitute,
+    verifyEmail,
     login,
     logout,
 };
