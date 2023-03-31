@@ -9,6 +9,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: "mysql",
+    logging: console.log,
     dialectOptions: {
       ssl: {
         require: true,
@@ -18,12 +19,31 @@ const sequelize = new Sequelize(
   }
 );
 
+const execute = async (q_number) => {
+  const queries = [
+    "truncate User;",
+    "truncate InstituteDetail;",
+    "show tables;",
+    "drop table if exists User , Submission , StudentDetail , Problem , InstituteDetail , ContestSubmission , ContestProblem , Contest , Badge;",
+    "select * from User;",
+    "select * from InstituteDetail;",
+  ];
+
+  console.log("--------------------------------------------");
+  const [result, metadata] = await sequelize.query(queries[q_number]);
+  console.log(result);
+  console.log("--------------------------------------------");
+};
+
 // test the connection and list all tables in the database
 const testConnection = async () => {
   try {
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
-    const [results, metadata] = await sequelize.query("SHOW TABLES;");
+    execute(4);
+    execute(5);
+
+    const [results, metadata] = await sequelize.query("show tables;");
     console.log("Result of testing qury : ", results);
   } catch (error) {
     console.error("Unable to connect to the database:", error);
@@ -31,7 +51,7 @@ const testConnection = async () => {
 };
 
 // uncomment next line to test db connecton
-// testConnection();
+testConnection();
 
 module.exports = {
   sequelize,

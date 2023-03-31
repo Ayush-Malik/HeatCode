@@ -1,16 +1,36 @@
 require("dotenv").config();
+require("express-async-errors");
+
+// express app
 const express = require("express");
 const app = express();
+
+// rest of the packages
+const morgan = require("morgan");
+// const cookieParser = require("cookie-parser");
+// const fileUpload = require("express-fileupload");
+
+// database
 const { sequelize } = require("./models/DBConnection");
-
 // next line synchronizes all models [uncomment if you made any changes in the scheams]
-// require("./models");
+// require("./models/syncModels");
 
-// -----------------------------------------
-app.get("/", (req, res) => {
-  res.send("Welcome to HeatCode!!!");
-});
-// -----------------------------------------
+// routers
+const authRouter = require("./routes/authRoutes");
+
+// middlewares
+const notFoundMiddleware = require("./middleware/not-found");
+const errorHandlerMiddleware = require("./middleware/error-handler");
+
+// ----------------------------------------------------------------
+app.use(morgan("tiny"));
+app.use(express.json());
+
+app.use("/api/v1/auth", authRouter);
+
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
+// ----------------------------------------------------------------
 
 const port = process.env.PORT || 5000;
 

@@ -9,15 +9,12 @@ const StudentDetail = require("./StudentDetail");
 const Submission = require("./Submission");
 const { sequelize } = require("./DBConnection");
 
-module.exports = {
-  sequelize,
-  Badges,
-  Contest,
-  ContestProblem,
-  ContestSubmission,
-  InstituteDetail,
-  Problem,
-  StudentDetail,
-  Submission,
-  User,
-};
+// Sync models with database
+sequelize
+  .sync()
+  .then(() => {
+    console.log("All models were synchronized successfully.");
+  })
+  .catch((error) => {
+    console.error("An error occurred while synchronizing the models:", error);
+  });
