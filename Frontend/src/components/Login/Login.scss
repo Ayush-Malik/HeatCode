@@ -1,13 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-
-$font-family: 'Questrial', sans-serif;
-$color: #74DBEF;
+@use "../../styles/base.scss" as *;
 
 body{
-    padding: 0;
-    margin: 0;
-    background-color: #181818;
-    color: #ffffff;
+    @include bodyStyle;
 }
 
 // login container
@@ -48,20 +42,7 @@ body{
         .button-div{
 
             .nav_btn{
-                font-family: $font-family;
-                font-size: 1rem;
-                font-weight: 600;
-                color: #ffffff;
-                background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
-                backdrop-filter: blur(20px);
-                border-radius: 10px;
-                padding: 14px 30px;
-                transition:  0.2s ease-in-out;
-    
-                &:hover{
-                    background: linear-gradient(125.7deg,hsla(0,0%,100%,.25) 25.43%,hsla(0,0%,100%,.15) 74.38%);
-                    transform: scale(1.04);
-                }
+                @include blackButton;
     
                 @media screen and (max-width: 485px) {
                     font-size: 0.7rem;
@@ -129,33 +110,14 @@ body{
             }
 
             h2{
-                font-family: $font-family;
-                font-size: 1.8rem;
+                @include heading1(1.8rem);
                 width: 70%;
-                font-weight: 600;
                 margin-bottom: 25px;
-                background: linear-gradient(283.41deg, $color, #3b87ce);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
             }
 
             .form_l_btn{
-                font-family: $font-family;
-                font-size: 1rem;
-                font-weight: 600;
-                color: #ffffff;
-                background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
-                backdrop-filter: blur(20px);
-                border-radius: 10px;
-                padding: 14px 30px;
-                transition:  0.2s ease-in-out;
+                @include blackButton;
                 margin-bottom: 20px;
-    
-                &:hover{
-                    background: linear-gradient(125.7deg,hsla(0,0%,100%,.25) 25.43%,hsla(0,0%,100%,.15) 74.38%);
-                    transform: scale(1.04);
-                }
             }
         }
 
@@ -163,20 +125,12 @@ body{
             width: 50%;
 
             h2{
-                font-family: $font-family;
-                background: linear-gradient(283.41deg, $color, #3b87ce);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-                font-size: 2.5rem;
-                font-weight: 600;
+                @include heading1(2.8rem);
                 margin-bottom: 5px;
             }
 
             p{
-                font-family: $font-family;
-                font-size: 1rem;
-                font-weight: 500;
+                @include paragraph(1rem);
                 margin-bottom: 30px;
             }
 
@@ -216,21 +170,8 @@ body{
                 }
 
                 .form_btn{
-                    font-family: $font-family;
-                    font-size: 1rem;
-                    font-weight: 600;
+                    @include blackButton;
                     width: 200px;
-                    color: #ffffff;
-                    background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
-                    backdrop-filter: blur(20px);
-                    border-radius: 10px;
-                    padding: 14px 30px;
-                    transition:  0.2s ease-in-out;
-        
-                    &:hover{
-                        background: linear-gradient(125.7deg,hsla(0,0%,100%,.25) 25.43%,hsla(0,0%,100%,.15) 74.38%);
-                        transform: scale(1.04);
-                    }
                 }
             }
         }

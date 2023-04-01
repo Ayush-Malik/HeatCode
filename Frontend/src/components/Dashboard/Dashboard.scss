@@ -1,0 +1,9 @@
+@use "../../styles/base.scss" as *;
+
+body{
+    @include bodyStyle;
+}
+
+.dashboard{
+    margin-top: 20px;
+}

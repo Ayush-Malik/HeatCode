@@ -1,13 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-
-$font-family: 'Questrial', sans-serif;
-$color: #74DBEF;
+@use "../../styles/base.scss" as *;
 
 body{
-    padding: 0;
-    margin: 0;
-    background-color: #181818;
-    color: #ffffff;
+    @include bodyStyle;
 }
 
 // main container
@@ -46,20 +40,7 @@ body{
         }
 
         .nav_btn{
-            font-family: $font-family;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #ffffff;
-            background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
-            backdrop-filter: blur(20px);
-            border-radius: 10px;
-            padding: 14px 30px;
-            transition:  0.2s ease-in-out;
-
-            &:hover{
-                background: linear-gradient(125.7deg,hsla(0,0%,100%,.25) 25.43%,hsla(0,0%,100%,.15) 74.38%);
-                transform: scale(1.04);
-            }
+            @include blackButton;
 
             @media screen and (max-width: 485px) {
                 font-size: 0.7rem;
@@ -95,18 +76,7 @@ body{
             }
 
             .header_btn{
-                font-family: $font-family;
-                font-size: 1.2rem;
-                font-weight: 500;
-                color: #ffffff;
-                background: linear-gradient(125.7deg,hsla(190,79%,70%,.65) 25.43%, hsla(190, 79%, 70%, .35) 74.38%);
-                padding: 10px 20px;
-                border-radius: 12px;
-                transition:  0.2s ease-in-out;
-
-                &:hover{
-                    transform: scale(1.04);
-                }
+                @include blueButton;
             }
 
             @media screen and (max-width: 770px) {
