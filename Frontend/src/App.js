@@ -3,7 +3,7 @@ import { BrowserRouter, Routes , Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Signup from "./components/Signup/signup";
 import Login from "./components/Login/Login";
-
+import NotFound from "./components/NotFound/NotFound";
 function App() {
   return (
     <div>
@@ -12,6 +12,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

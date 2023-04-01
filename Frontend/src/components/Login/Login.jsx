@@ -35,7 +35,7 @@ export default function Login() {
             {/* Title and Description */}
             <Helmet>
                 <title>Login - HeatCode</title>
-                <meta name="description" content="Signup to HeatCode and get your heat on!" />
+                <meta name="description" content="Login to HeatCode and get your heat on!" />
             </Helmet>
 
             {/* login */}
