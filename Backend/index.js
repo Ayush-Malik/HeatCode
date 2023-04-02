@@ -22,6 +22,8 @@ const authRouter = require("./routes/authRoutes");
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
+const { sendVerificationEmail } = require("./utils/send_mail");
+sendVerificationEmail("ayushmalik779@gmail.com", "mai token hu");
 // ----------------------------------------------------------------
 app.use(morgan("tiny"));
 app.use(express.json());
@@ -34,12 +36,12 @@ app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5000;
 
-const start = async () => {
-  try {
-    app.listen(port, console.log(`HeatCode is running at PORT = ${port}`));
-  } catch (err) {
-    console.log(err);
-  }
+const start = async() => {
+    try {
+        app.listen(port, console.log(`HeatCode is running at PORT = ${port}`));
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 start();

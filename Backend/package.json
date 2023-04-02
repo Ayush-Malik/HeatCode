@@ -18,6 +18,7 @@
     },
     "homepage": "https://github.com/Ayush-Malik/HeatCode#readme",
     "dependencies": {
+        "@sendgrid/mail": "^7.7.0",
         "bcrypt": "^5.1.0",
         "cli": "^1.0.1",
         "cookie-parser": "^1.4.6",
