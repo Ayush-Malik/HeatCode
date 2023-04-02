@@ -4,6 +4,10 @@ body{
     @include bodyStyle;
 }
 
+.h-loader{
+    @include loader;
+}
+
 // login container
 .login{
     margin-top: 20px;

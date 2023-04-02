@@ -57,3 +57,11 @@ $color: #74DBEF;
     font-size: $font-size;
     font-weight: 500;
 }
+
+@mixin loader{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
