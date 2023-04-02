@@ -1,0 +1,165 @@
+@use "../../styles/base.scss" as *;
+
+.navbar{
+    .nav{
+        padding: 10px 0;
+        background-color: #181818;
+
+        .nav-logo{
+            display: flex;
+            align-items: center;
+
+            img{
+                width: 50px;
+                margin-right: 20px;
+            }
+
+            span{
+                @include paragraph(1.8rem);
+            }
+        }
+
+        .nav-links{
+
+            .nav-link{
+                margin-right: 20px;
+                text-decoration: none;
+                transition: all 0.3s ease-in-out;
+
+                button{
+                    @include heading1(1.3rem);
+                }
+
+                &:hover{
+                    transform: scale(1.06);
+                    text-decoration: underline;
+                }
+            }
+
+            .active{
+                color: $color;
+                text-decoration: underline;
+            }
+
+            @media screen and (max-width: 850px){
+                .nav-link{
+                    margin-right: 10px;
+
+                    button{
+                        @include heading1(1.1rem);
+                    }
+                }
+            }
+        }
+
+        .nav-buttons{
+            .nav-btn{
+                @include blueButton;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .d-icon{
+                    font-size: 1.3rem;
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 850px){
+            .nav-logo{
+                img{
+                    width: 40px;
+                    margin-right: 10px;
+                }
+
+                span{
+                    @include paragraph(1.5rem);
+                }
+            }
+
+            .nav-links{
+                .nav-link{
+                    margin-right: 10px;
+
+                    button{
+                        @include heading1(1.1rem);
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 490px){
+
+            .nav-logo{
+                img{
+                    width: 30px;
+                }
+
+                span{
+                    @include paragraph(1.3rem);
+                }
+            }
+
+            .nav-buttons{
+                .nav-btn{
+                    font-size: 1rem;
+                    padding: 5px 10px;
+                    border-radius: 6px;
+
+                    .d-icon{
+                        font-size: 1.1rem;
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 360px){
+            .nav-logo{
+                img{
+                    width: 25px;
+                }
+
+                span{
+                    @include paragraph(1.1rem);
+                }
+            }
+        }
+    }
+}
+
+.nav-drawer{
+
+    .MuiDrawer-paper{
+        background-color: #181818;
+
+        .d-box{
+            .nav-link{
+                margin-right: 20px;
+                text-decoration: none;
+                transition: all 0.3s ease-in-out;
+
+                .d-icon{
+                    color: #3b87ce;
+                    font-size: 1.3rem;
+                    margin-right: 10px;
+                }
+
+                div div span{
+                    @include heading1(1.3rem);
+                }
+
+                &:hover{
+                    transform: scale(1.06);
+                    text-decoration: underline;
+                }
+            }
+
+            .active{
+                color: $color;
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { Container, Button, FormControl, TextField } from "@mui/material";
+import { HashLoader } from "react-spinners";
 import logo from "../../images/HeatCode_logo.png";
 import LoginImg from "../../images/login1.png";
 import "./Login.scss";
@@ -13,6 +14,7 @@ export default function Login() {
         email: "",
         password: "",
     });
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,7 +28,13 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
         alert("Login Successful!");
+        setTimeout(() => {
+            setLoading(false);
+            navigate("/dashboard");
+        }, 2000);
+
     };
 
     return (
@@ -35,10 +43,14 @@ export default function Login() {
             {/* Title and Description */}
             <Helmet>
                 <title>Login - HeatCode</title>
-                <meta name="description" content="Signup to HeatCode and get your heat on!" />
+                <meta name="description" content="Login to HeatCode and get your heat on!" />
             </Helmet>
 
-            {/* login */}
+            { loading ? (
+                <div className="h-loader">
+                    <HashLoader color="#74DBEF" loading={loading} size={200} />
+                </div>
+            ) : (
             <div className="login">
                 
                 {/* navbar */}
@@ -96,6 +108,7 @@ export default function Login() {
                 </Container>
 
             </div>
+            )}
 
         </HelmetProvider>
     );

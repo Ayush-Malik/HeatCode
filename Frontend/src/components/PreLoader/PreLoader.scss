@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-
-$font-family: 'Questrial', sans-serif;
-$color: #74DBEF;
+@use "../../styles/base.scss" as *;
 
 .preloader{
     width: 100%;

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { Container, Button, FormControl, TextField } from "@mui/material";
+import HashLoader from "react-spinners/HashLoader";
 import logo from "../../images/HeatCode_logo.png";
 import SignupImg1 from "../../images/signup1.png";
 import SignupImg2 from "../../images/signup2.png";
@@ -24,6 +25,7 @@ export default function Signup() {
         address: "",
         password: "",
     });
+    const [loading, setLoading] = useState(false);
 
     const handleFormChange = () => {
         setForm(!form);
@@ -45,15 +47,24 @@ export default function Signup() {
 
     const handleStudentSignup = (e) => {
         e.preventDefault();
+        setLoading(true);
         alert("Student Signup");
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
     }
 
     const handleInstituteSignup = (e) => {
         e.preventDefault();
+        setLoading(true);
         alert("Institute Signup");
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
     }
 
     return(
+
         <HelmetProvider>
 
             {/* Title and Description */}
@@ -62,7 +73,11 @@ export default function Signup() {
                 <meta name="description" content="Signup to HeatCode and get your heat on!" />
             </Helmet>
 
-            {/* signup */}
+            { loading ? (
+                <div className="h-loader">
+                    <HashLoader color="#74DBEF" loading={loading} size={200} />
+                </div>
+            ) : (
             <div className="signup">
                 
                 {/* navbar */}
@@ -218,6 +233,7 @@ export default function Signup() {
                 }
 
             </div>
+            )}
 
         </HelmetProvider>
     );

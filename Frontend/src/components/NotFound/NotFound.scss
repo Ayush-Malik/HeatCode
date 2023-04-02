@@ -1,0 +1,42 @@
+@use "../../styles/base.scss" as *;
+
+body{
+    @include bodyStyle;
+}
+
+// notfound container
+.notfound{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img{
+        width: 400px;
+    }
+
+    h2{
+        @include heading1(2.5rem);
+    }
+
+    @media screen and (max-width: 745px) {
+        img{
+            width: 300px;
+        }
+
+        h2{
+            font-size: 1.5rem;
+        }
+    }
+
+    @media screen and (max-width: 485px) {
+        img{
+            width: 200px;
+        }
+
+        h2{
+            font-size: 1.2rem;
+        }
+    }
+}
