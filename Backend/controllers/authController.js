@@ -3,6 +3,7 @@ const { body, query, validationResult } = require("express-validator");
 const { sequelize, User, InstituteDetail } = require("../models");
 const customError = require("../errors");
 const crypto = require("crypto");
+const { sendVerificationEmail } = require("../utils");
 
 const registerStudent = [
     body("name").notEmpty().withMessage("Name is required"),
@@ -42,6 +43,8 @@ const registerStudent = [
             verificationToken: crypto.randomBytes(40).toString("hex"),
         };
         const { dataValues: user } = await User.create(newUser);
+
+        await sendVerificationEmail(newUser.email, newUser.verificationToken);
 
         res.status(StatusCodes.CREATED).json({
             msg: "Student User created successfully!!!",
@@ -117,6 +120,8 @@ const registerInstitute = [
             address,
         };
         await InstituteDetail.create(newInstitute);
+
+        await sendVerificationEmail(newUser.email, newUser.verificationToken);
 
         res.status(StatusCodes.CREATED).json({
             msg: "Institute User created successfully!!!",

@@ -22,8 +22,6 @@ const authRouter = require("./routes/authRoutes");
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
-const { sendVerificationEmail } = require("./utils/send_mail");
-sendVerificationEmail("ayushmalik779@gmail.com", "mai token hu");
 // ----------------------------------------------------------------
 app.use(morgan("tiny"));
 app.use(express.json());
