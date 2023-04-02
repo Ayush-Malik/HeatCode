@@ -4,6 +4,10 @@ body{
     @include bodyStyle;
 }
 
+.h-loader{
+    @include loader;
+}
+
 .dashboard{
     margin-top: 20px;
 }
