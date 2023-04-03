@@ -176,9 +176,6 @@ const verifyEmail = [
         user.verificationToken = "";
         await user.save(); // so that no one can login using verification email more than once
 
-        const tokenUser = await createTokenUser(user.dataValues);
-        attachCookiesToResponse({ res, tokenUser: user.dataValues });
-
         res.status(StatusCodes.OK).json({ "msg": "User verified Successfully!!!" });
     },
 ];
