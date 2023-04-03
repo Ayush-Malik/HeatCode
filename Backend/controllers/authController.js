@@ -3,7 +3,11 @@ const { body, query, validationResult } = require("express-validator");
 const { sequelize, User, InstituteDetail } = require("../models");
 const customError = require("../errors");
 const crypto = require("crypto");
-const { sendVerificationEmail } = require("../utils");
+const {
+    sendVerificationEmail,
+    createTokenUser,
+    attachCookiesToResponse,
+} = require("../utils");
 
 const registerStudent = [
     body("name").notEmpty().withMessage("Name is required"),
@@ -48,7 +52,11 @@ const registerStudent = [
 
         res.status(StatusCodes.CREATED).json({
             msg: "Student User created successfully!!!",
-            verificationToken: user.verificationToken,
+            user: {
+                name: newUser.name,
+                email: newUser.email,
+                role: newUser.role,
+            },
         });
     },
 ];
@@ -119,13 +127,21 @@ const registerInstitute = [
             instituteName,
             address,
         };
+
         await InstituteDetail.create(newInstitute);
 
         await sendVerificationEmail(newUser.email, newUser.verificationToken);
 
+        newUser.instituteName = instituteName; // so that token user has this
+
         res.status(StatusCodes.CREATED).json({
             msg: "Institute User created successfully!!!",
-            verificationToken: user.verificationToken,
+            user: {
+                name: newUser.name,
+                email: newUser.email,
+                role: newUser.role,
+                instituteName: newUser.instituteName,
+            },
         });
     },
 ];
@@ -159,6 +175,9 @@ const verifyEmail = [
         user.verifiedOn = Date.now();
         user.verificationToken = "";
         await user.save(); // so that no one can login using verification email more than once
+
+        const tokenUser = await createTokenUser(user.dataValues);
+        attachCookiesToResponse({ res, tokenUser: user.dataValues });
 
         res.status(StatusCodes.OK).json({ "msg": "User verified Successfully!!!" });
     },
@@ -207,14 +226,37 @@ const login = [
             );
         }
 
-        res.send("login route");
+        var data = {
+            name: user.dataValues.name,
+            email: user.dataValues.email,
+            role: user.dataValues.role,
+        };
+
+        if (user.role === "institute") {
+            const institute_detail = await InstituteDetail.findOne({
+                where: { userId: user.userId },
+            });
+
+            data.instituteName = institute_detail.instituteName;
+        }
+        const tokenUser = await createTokenUser(user.dataValues);
+        attachCookiesToResponse({ res, tokenUser });
+
+        res.status(StatusCodes.OK).json({
+            msg: "User logged in successfully!!!",
+            user: data,
+        });
     },
 ];
 
 // ------------------------------------------------------------------------------------
 
 const logout = async(req, res, next) => {
-    res.send("logout route");
+    res.cookie("token", "logout", {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000),
+    });
+    res.status(StatusCodes.OK).json({ msg: "user logged out!" });
 };
 
 module.exports = {
