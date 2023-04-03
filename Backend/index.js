@@ -8,6 +8,7 @@ const app = express();
 // rest of the packages
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 // const fileUpload = require("express-fileupload");
 
 // database
@@ -24,6 +25,7 @@ const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
 // ----------------------------------------------------------------
+app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
