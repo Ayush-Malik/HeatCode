@@ -39,12 +39,12 @@ app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5000;
 
-const start = async() => {
-    try {
-        app.listen(port, console.log(`HeatCode is running at PORT = ${port}`));
-    } catch (err) {
-        console.log(err);
-    }
+const start = async () => {
+  try {
+    app.listen(port, console.log(`HeatCode is running at PORT = ${port}`));
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 start();

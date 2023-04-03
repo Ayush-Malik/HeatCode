@@ -1,22 +1,22 @@
 const sgMail = require("@sendgrid/mail");
 
-const sendEmail = async(data) => {
-    try {
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-        await sgMail.send(data);
-        console.log("EMAIL SENT SUCCESSFULLY");
-    } catch (error) {
-        console.error(error);
-    }
+const sendEmail = async (data) => {
+  try {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    await sgMail.send(data);
+    console.log("EMAIL SENT SUCCESSFULLY");
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-const sendVerificationEmail = async(userEmail, verificationToken) => {
-    const link =
-        process.env.ROOT_URL +
-        `/auth/verify-email/?email=${userEmail}&verificationToken=${verificationToken}`;
-    console.log(link);
+const sendVerificationEmail = async (userEmail, verificationToken) => {
+  const link =
+    process.env.ROOT_URL +
+    `/auth/verify-email/?email=${userEmail}&verificationToken=${verificationToken}`;
+  console.log(link);
 
-    const html = `
+  const html = `
     <html>
       <head>
         <style>
@@ -34,17 +34,52 @@ const sendVerificationEmail = async(userEmail, verificationToken) => {
     </html>
   `;
 
-    const msg = {
-        to: userEmail,
-        from: process.env.GMAIL_ID,
-        subject: "Verify your HeatCode Account",
-        html: html,
-    };
+  const msg = {
+    to: userEmail,
+    from: process.env.GMAIL_ID,
+    subject: "Verify your HeatCode Account",
+    html: html,
+  };
 
-    await sendEmail(msg);
+  await sendEmail(msg);
+};
+
+const sendPasswordResetEmail = async (userEmail, verificationToken) => {
+  const link =
+    process.env.ROOT_URL +
+    `/auth/verify-password-reset-email/?email=${userEmail}&verificationToken=${verificationToken}`;
+  console.log(link);
+
+  const html = `
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Password Reset Email</title>
+    </head>
+    <body>
+      <div>
+        <h1>Password Reset Request</h1>
+        <p>You have requested to reset your password. Please click the link below to reset your password:</p>
+        <p><a href="{reset_link}">{reset_link}</a></p>
+        <p>If you did not request this reset, please ignore this email.</p>
+        <p>Thank you,</p>
+        <p>The Heatcode Team</p>
+      </div>
+    </body>
+    </html>`;
+
+  const msg = {
+    to: userEmail,
+    from: process.env.GMAIL_ID,
+    subject: "Password Reset Request for Heatcode Account",
+    html: html,
+  };
+
+  await sendEmail(msg);
 };
 
 module.exports = {
-    sendEmail,
-    sendVerificationEmail,
+  sendEmail,
+  sendVerificationEmail,
+  sendPasswordResetEmail,
 };
