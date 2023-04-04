@@ -87,6 +87,15 @@ export default function Login() {
                 <Container className="login_form">
                     <div className="form_left">
                         <img src={LoginImg} alt="Login" />
+                        <h2>
+                            Forgot your password?
+                        </h2>
+                        <p>
+                            No worries! Click on the button below to reset your password.
+                        </p>
+                        <Button className="form_l_btn" onClick={() => navigate("/forgot_password")}>
+                            Reset Password
+                        </Button>
                     </div>
                     <div className="form_right">
                         <h2>Login</h2>

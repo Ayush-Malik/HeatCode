@@ -29,7 +29,7 @@ export default function Dashboard() {
                 alert(err);
                 navigate("/login");
             });
-    }, []);
+    }, [navigate]);
 
     return (
         <HelmetProvider>
@@ -53,7 +53,7 @@ export default function Dashboard() {
                 {/* dashboard */}
                 <Box className="dashboard" sx={{ p: 3 }}>
                     <Toolbar />
-                    heelo
+                    {user.name}
                 </Box>
             </>
             )}
