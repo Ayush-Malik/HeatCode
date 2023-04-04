@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const baseURL = process.env.REACT_APP_BASE_URL;
+
 /**
     * Function to make API calls
     * @param {string} url - URL to make API call
@@ -11,16 +13,17 @@ import axios from "axios";
     * @example
     * const data = await apiCall("http://localhost:3001/api/users", "GET");
 */
-export const apiCall = async (url, method, data = null, headers = {}) => {
+export const apiCall = async (url, method, data = null, headers = {}, credentials = false) => {
     try {
       const response = await axios({
         method,
-        url,
+        url: `${baseURL}${url}`,
         data,
         headers,
+        withCredentials: credentials
       });
-      return response.data;
+      return response;
     } catch (error) {
-      throw new Error(error.response.data.error);
+      throw error.response.data.msg;
     }
 };

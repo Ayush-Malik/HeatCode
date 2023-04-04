@@ -25,7 +25,7 @@ const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
 // ----------------------------------------------------------------
-app.use(cors());
+app.use(cors({ credentials: true, origin: process.env.FRONT_END_URL }));
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
@@ -39,12 +39,12 @@ app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5000;
 
-const start = async () => {
-  try {
-    app.listen(port, console.log(`HeatCode is running at PORT = ${port}`));
-  } catch (err) {
-    console.log(err);
-  }
+const start = async() => {
+    try {
+        app.listen(port, console.log(`HeatCode is running at PORT = ${port}`));
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 start();

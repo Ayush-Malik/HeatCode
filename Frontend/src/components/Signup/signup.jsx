@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { Container, Button, FormControl, TextField } from "@mui/material";
+import { apiCall } from "../../utils/api";
 import HashLoader from "react-spinners/HashLoader";
 import logo from "../../images/HeatCode_logo.png";
 import SignupImg1 from "../../images/signup1.png";
@@ -16,6 +17,7 @@ export default function Signup() {
         name: "",
         email: "",
         password: "",
+        role: "student"
     });
     const [instituteData, setInstituteData] = useState({
         name: "",
@@ -24,6 +26,7 @@ export default function Signup() {
         contact: "",
         address: "",
         password: "",
+        role: "institute"
     });
     const [loading, setLoading] = useState(false);
 
@@ -48,19 +51,31 @@ export default function Signup() {
     const handleStudentSignup = (e) => {
         e.preventDefault();
         setLoading(true);
-        alert("Student Signup");
-        setTimeout(() => {
+        apiCall("/auth/register/student", "post", studentData)
+        .then((res) => {
             setLoading(false);
-        }, 2000);
+            navigate("/verify");
+        })
+        .catch((err) => {
+            setLoading(false);
+            setTimeout(() => {
+                alert(err);
+            }, 1000);
+        });
     }
 
     const handleInstituteSignup = (e) => {
         e.preventDefault();
         setLoading(true);
-        alert("Institute Signup");
-        setTimeout(() => {
+        apiCall("/auth/register/institute", "post", instituteData)
+        .then((res) => {
             setLoading(false);
-        }, 2000);
+            navigate("/verify");
+        })
+        .catch((err) => {
+            setLoading(false);
+            alert(err);
+        });
     }
 
     return(

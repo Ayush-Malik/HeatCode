@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/slices/userSlice";
 import { Container, Button, FormControl, TextField } from "@mui/material";
+import { apiCall } from "../../utils/api";
 import { HashLoader } from "react-spinners";
 import logo from "../../images/HeatCode_logo.png";
 import LoginImg from "../../images/login1.png";
@@ -10,6 +13,7 @@ import "./Login.scss";
 export default function Login() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [loginData, setLoginData] = useState({
         email: "",
         password: "",
@@ -29,11 +33,21 @@ export default function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        alert("Login Successful!");
-        setTimeout(() => {
-            setLoading(false);
-            navigate("/dashboard");
-        }, 2000);
+        apiCall("/auth/login", "post", loginData, {}, true)
+            .then((res) => {
+                setLoading(false);
+                dispatch(setUser(res.data.user));
+                navigate("/dashboard");
+            })
+            .catch((err) => {
+                setLoading(false);
+                setTimeout(() => {
+                    if(typeof err === "object")
+                        alert(err[0].msg);
+                    else
+                        alert(err);
+                }, 1000);
+            });
 
     };
 
