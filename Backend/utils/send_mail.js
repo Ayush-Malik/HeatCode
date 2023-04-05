@@ -44,10 +44,10 @@ const sendVerificationEmail = async(userEmail, verificationToken) => {
     await sendEmail(msg);
 };
 
-const sendPasswordResetEmail = async(userEmail, verificationToken) => {
+const sendPasswordResetEmail = async(userEmail, passwordResetToken) => {
     const reset_link =
         process.env.FRONT_END_URL +
-        `/reset_password/?verificationToken=${verificationToken}`;
+        `/reset_password/?passwordResetToken=${passwordResetToken}`;
     console.log(reset_link);
 
     const html = `
