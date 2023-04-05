@@ -37,7 +37,7 @@ export default function Login() {
             .then((res) => {
                 setLoading(false);
                 dispatch(setUser(res.data.user));
-                navigate("/dashboard");
+                navigate("/practice");
             })
             .catch((err) => {
                 setLoading(false);
@@ -94,7 +94,7 @@ export default function Login() {
                             No worries! Click on the button below to reset your password.
                         </p>
                         <Button className="form_l_btn" onClick={() => navigate("/forgot_password")}>
-                            Reset Password
+                            Forgot Password
                         </Button>
                     </div>
                     <div className="form_right">

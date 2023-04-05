@@ -2,16 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { useSelector } from "react-redux";
-import {
-    Box,
-    Toolbar
-} from "@mui/material"
+import { Box, Toolbar } from "@mui/material"
 import { apiCall } from "../../utils/api";
 import { HashLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
-import "./Dashboard.scss";
+import "./Practice.scss";
 
-export default function Dashboard() {
+export default function Practice() {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -26,7 +23,12 @@ export default function Dashboard() {
             })
             .catch((err) => {
                 setLoading(false);
-                alert(err);
+                setTimeout(() => {
+                    if(typeof err === "object")
+                        alert(err[0].msg);
+                    else
+                        alert(err);
+                }, 1000);
                 navigate("/login");
             });
     }, [navigate]);
@@ -36,8 +38,8 @@ export default function Dashboard() {
 
             {/* Title and Description */}
             <Helmet>
-                <title>Dashboard - HeatCode</title>
-                <meta name="description" content="Welcome to your dashboard!" />
+                <title>Practice - HeatCode</title>
+                <meta name="description" content="Get ready for the interview" />
             </Helmet>
 
             { loading ? (
@@ -50,8 +52,8 @@ export default function Dashboard() {
                 {/* Navbar */}
                 <Navbar />
 
-                {/* dashboard */}
-                <Box className="dashboard" sx={{ p: 3 }}>
+                {/* practice */}
+                <Box className="practice" sx={{ p: 3 }}>
                     <Toolbar />
                     {user.name}
                 </Box>

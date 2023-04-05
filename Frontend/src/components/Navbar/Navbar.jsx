@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import {
     AppBar,
@@ -13,22 +14,39 @@ import {
     Typography,
     Button
 } from "@mui/material";
-import { AiOutlineMenu } from "react-icons/ai";
+import { apiCall } from "../../utils/api";
+import { AiOutlineMenu, AiOutlineCode } from "react-icons/ai";
 import { FaHome, FaUserAlt } from "react-icons/fa";
 import HeatLogo from "../../images/HeatCode_logo.png";
 import "./Navbar.scss";
 
 export default function Navbar() {
 
+    const navigate = useNavigate();
     const [drawerOpen, setDrawerOpen] = useState(false);
+
+    const navItems = ["Practice", "About", "Contact"];
+    const navLinks = ["/Practice", "/about", "/contact"];
+    const navIcons = [<AiOutlineCode className="d-icon" />, <FaHome className="d-icon" />, <FaHome className="d-icon" />];
 
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen);
     };
 
-    const navItems = ["Dashboard", "About", "Contact"];
-    const navLinks = ["/dashboard", "/about", "/contact"];
-    const navIcons = [<FaHome className="d-icon" />, <FaHome className="d-icon" />, <FaHome className="d-icon" />];
+    const handleLogout = () => {
+        apiCall("/auth/logout", "get", null, {}, true)
+            .then((res) => {
+                navigate("/login");
+            })
+            .catch((err) => {
+                setTimeout(() => {
+                    if(typeof err === "object")
+                        alert(err[0].msg);
+                    else
+                        alert(err);
+                }, 1000);
+            });
+    };
 
     return (
         <div className="navbar">
@@ -58,9 +76,12 @@ export default function Navbar() {
                                 </NavLink>
                             ))}
                         </Box>
-                        <Box sx={{ flexGrow: 0 }} className="nav-buttons">
+                        <Box sx={{ flexGrow: 0.1 }} className="nav-buttons">
                             <Button className="nav-btn">
                                 <FaUserAlt className="d-icon" /> Profile
+                            </Button>
+                            <Button className="nav-btn" onClick={handleLogout}>
+                                <FaUserAlt className="d-icon"/> Logout
                             </Button>
                         </Box>
                     </Toolbar>
