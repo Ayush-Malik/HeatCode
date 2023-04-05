@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/slices/userSlice";
 import { Container, Button, FormControl, TextField } from "@mui/material";
 import { apiCall } from "../../utils/api";
+import { createStorage } from "../../utils/localStore";
 import { HashLoader } from "react-spinners";
 import logo from "../../images/HeatCode_logo.png";
 import LoginImg from "../../images/login1.png";
@@ -37,6 +38,7 @@ export default function Login() {
             .then((res) => {
                 setLoading(false);
                 dispatch(setUser(res.data.user));
+                createStorage("user", res.data.user);
                 navigate("/practice");
             })
             .catch((err) => {

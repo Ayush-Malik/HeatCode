@@ -1,34 +1,40 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import { useSelector } from "react-redux";
-import { Box, Toolbar } from "@mui/material"
+import { useSelector, useDispatch } from "react-redux";
 import { apiCall } from "../../utils/api";
+import { getStorage } from "../../utils/localStore";
+import { setUser } from "../../redux/slices/userSlice";
+import { Box, Toolbar } from "@mui/material"
 import { HashLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
-import "./Practice.scss";
+import "./Profile.scss";
 
-export default function Practice() {
+export default function Profile() {
 
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const user = useSelector((state) => state.user);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setLoading(true);
+        if(user === null){
+            const localUser = getStorage("user");
+            if(localUser === null){
+                navigate("/login");
+            }
+            else{
+                dispatch(setUser(localUser));
+            }
+        }
+    }, [navigate, dispatch, user]);
+
+    useEffect(() => {
         apiCall("/problem/showAll", "get", null, {}, true)
             .then((res) => {
                 setLoading(false);
-                console.log(res);
             })
             .catch((err) => {
-                setLoading(false);
-                setTimeout(() => {
-                    if(typeof err === "object")
-                        alert(err[0].msg);
-                    else
-                        alert(err);
-                }, 1000);
                 navigate("/login");
             });
     }, [navigate]);
@@ -38,8 +44,8 @@ export default function Practice() {
 
             {/* Title and Description */}
             <Helmet>
-                <title>Practice - HeatCode</title>
-                <meta name="description" content="Get ready for the interview" />
+                <title>Profile - HeatCode</title>
+                <meta name="description" content="Profile page of HeatCode" />
             </Helmet>
 
             { loading ? (
@@ -50,16 +56,15 @@ export default function Practice() {
 
             <>
                 {/* Navbar */}
-                <Navbar />
+                <Navbar setLoading={setLoading} />
 
-                {/* practice */}
-                <Box className="practice" sx={{ p: 3 }}>
+                {/* profile */}
+                <Box className="profile" sx={{ p: 3 }}>
                     <Toolbar />
-                    {user.name}
                 </Box>
             </>
             )}
             
         </HelmetProvider>
-    );
+    )
 }

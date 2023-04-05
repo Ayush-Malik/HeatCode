@@ -7,7 +7,8 @@ import NotFound from "./components/NotFound/NotFound";
 import Verify from "./components/Verify/Verify";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
-import Practice from "./components/Dashboard/Practice";
+import Practice from "./components/Practice/Practice";
+import Profile from "./components/Profile/Profile";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/forgot_password" element={<ForgotPassword />} />
           <Route exact path="/reset_password" element={<ResetPassword />} />
           <Route exact path="/practice" element={<Practice />} />
+          <Route exact path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
