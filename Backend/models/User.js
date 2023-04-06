@@ -47,6 +47,7 @@ const User = sequelize.define(
         this.setDataValue("badges", JSON.stringify(value));
       },
     },
+
     verificationToken: {
       type: Sequelize.STRING,
       allowNull: false,

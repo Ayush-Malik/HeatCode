@@ -41,8 +41,7 @@ const testConnection = async () => {
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
 
-    execute(4);
-    execute(5);
+    execute(3);
 
     const [results, metadata] = await sequelize.query("show tables;");
     console.log("Result of testing qury : ", results);

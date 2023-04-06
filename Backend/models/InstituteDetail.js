@@ -14,15 +14,14 @@ const InstituteDetail = sequelize.define(
     },
     phone: {
       type: Sequelize.STRING(20),
-      allowNull: false,
     },
     instituteName: {
       type: Sequelize.STRING,
       allowNull: false,
+      unique: true,
     },
     address: {
       type: Sequelize.STRING,
-      allowNull: false,
     },
   },
   {
