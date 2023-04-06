@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/slices/userSlice";
 import { Container, Button, FormControl, TextField } from "@mui/material";
 import { apiCall } from "../../utils/api";
+import { createStorage } from "../../utils/localStore";
 import { HashLoader } from "react-spinners";
 import logo from "../../images/HeatCode_logo.png";
 import LoginImg from "../../images/login1.png";
@@ -37,7 +38,8 @@ export default function Login() {
             .then((res) => {
                 setLoading(false);
                 dispatch(setUser(res.data.user));
-                navigate("/dashboard");
+                createStorage("user", res.data.user);
+                navigate("/practice");
             })
             .catch((err) => {
                 setLoading(false);
@@ -94,7 +96,7 @@ export default function Login() {
                             No worries! Click on the button below to reset your password.
                         </p>
                         <Button className="form_l_btn" onClick={() => navigate("/forgot_password")}>
-                            Reset Password
+                            Forgot Password
                         </Button>
                     </div>
                     <div className="form_right">

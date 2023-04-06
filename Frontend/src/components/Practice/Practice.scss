@@ -1,0 +1,49 @@
+@use "../../styles/base.scss" as *;
+
+body{
+    @include bodyStyle;
+}
+
+.h-loader{
+    @include loader;
+}
+
+.practice{
+    margin-top: 20px;
+
+    .practice_crousel{
+        width: 90%;
+        margin: 0 auto;
+
+        .p_crousel{
+            border: 1px solid $color;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 2px 3px 5px 0 $color;
+
+            .practice_carousel_item{
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                .practice_carousel_item_left{
+                    h2{
+                        @include heading1(2.3rem);
+                        text-align: start
+                    }
+
+                    p{
+                        @include paragraph(1.2rem);
+                        text-align: justify;
+                    }
+                }
+
+                .practice_carousel_item_right{
+                    img{
+                        width: 300px;
+                    }
+                }
+            }
+        }
+    }
+}
