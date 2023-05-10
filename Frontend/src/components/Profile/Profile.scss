@@ -8,6 +8,219 @@ body{
     @include loader;
 }
 
+
 .profile{
-    margin-top: 20px;
+
+    .profile_info{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        border-right: 2px solid $color;
+        position: relative;
+        padding: 20px 0px;
+
+        .edit_icon{
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: $color;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+
+            &:hover{
+                transform: scale(1.06);
+            }
+        }
+
+        .user_image{
+            width: 120px;
+            height: 120px;
+            border: 1px solid $color;
+            border-radius: 50%;
+        }
+
+        h2{
+            @include heading1(2.3rem);
+            margin: 15px 0px 5px 0px;
+        }
+
+        .user_email{
+            @include paragraph(1.1rem);
+            margin: 0px 0px 15px 0px;
+        }
+
+        .user_bio{
+            @include paragraph(1.1rem);
+            margin: 0px 0px 15px 0px;
+        }
+
+        .user_links{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .user_link{
+                margin: 10px 25px 0px 0px;
+                color: $color;
+                text-decoration: none;
+                font-size: 1.2rem;
+                transition: all 0.3s ease-in-out;
+
+                &:hover{
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        hr{
+            width: 100%;
+            margin: 20px 0px;
+            border: 1px solid $color;
+        }
+
+        .user_about{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+
+            h3{
+                @include heading1(1.3rem);
+                margin: 15px 0px 5px 0px;
+            }
+
+            .user_about_item{
+                margin: 10px 0px 10px 0px;
+                text-decoration: none;
+                font-size: 1.2rem;
+                font-family: $font-family;
+            }
+        }
+    }
+
+    .profile_stats{
+        padding: 20px 40px;
+
+        .profile_heatmap{
+            width: 100%;
+            
+            h2{
+                @include heading1(2.3rem);
+                margin: 15px 0px 5px 0px;
+            }
+
+            svg{
+                width: 100%;
+            }
+
+            .react-calendar-heatmap .color-empty{
+                fill: hsla(0,0%,100%,.25);
+            }
+            .react-calendar-heatmap .color-scale-1{ 
+                fill: #dde5f1;
+            }
+            .react-calendar-heatmap .color-scale-2{
+                fill: #99dae7;
+            }
+            .react-calendar-heatmap .color-scale-3 {
+                fill: #61cde2;
+            }
+            .react-calendar-heatmap .color-scale-4 {
+                fill: #28afca;
+            }
+        }
+
+        .stats{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 50px;
+
+            .submissions{
+                width: 50%;
+                height: 260px;
+
+                h2{
+                    @include heading1(1.7rem);
+                    margin: 0px 0px 15px 0px;
+                }
+            }
+
+            .monthly{
+                width: 50%;
+                height: 280px;
+
+                h2{
+                    @include heading1(1.7rem);
+                    margin: 0px 0px 15px 0px;
+                }
+
+                .select{
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-end;
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+
+                    div{
+                        width: 180px;
+                        height: 40px;
+                        font-size: 1.7rem;
+                        font-family: $font-family;
+                        color: $color;
+                        cursor: pointer;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+        .contest{
+            margin-top: 60px;
+
+            h2{
+                @include heading1(1.7rem);
+                margin: 0px 0px 15px 0px;
+            }
+
+            .contest_list{
+                margin-top: 20px;
+
+                .contest_item{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border: 1px solid $color;
+                    border-radius: 5px;
+                    padding: 10px 20px;
+                    height: 40px;
+                    margin-bottom: 5px;
+                    cursor: pointer;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover{
+                        transform: scale(1.02);
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 910px){
+        display: block;
+
+        .profile_info{
+            border-right: none;
+            padding: 20px 0px;
+            margin-bottom: 20px;
+
+            .edit_icon{
+                top: 0px;
+                right: 0px;
+            }
+        }
+    }
 }

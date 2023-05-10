@@ -44,6 +44,224 @@ body{
                     }
                 }
             }
+
+            @media screen and (max-width: 748px){
+                .practice_carousel_item{
+                    flex-direction: column;
+
+                    .practice_carousel_item_left{
+                        h2{
+                            text-align: center;
+                        }
+
+                        p{
+                            text-align: center;
+                        }
+                    }
+
+                    .practice_carousel_item_right{
+                        img{
+                            width: 200px;
+                        }
+                    }
+                }
+            }
+
+            @media screen and (max-width: 400px){
+                .practice_carousel_item{
+                    .practice_carousel_item_left{
+                        h2{
+                            font-size: 1.8rem;
+                        }
+
+                        p{
+                            font-size: 1rem;
+                        }
+                    }
+
+                    .practice_carousel_item_right{
+                        img{
+                            width: 150px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .practice_problems{
+        margin-top: 50px;
+
+        h2{
+            @include heading1(2.2rem);
+        }
+
+        .practice_problems_container{
+            margin-top: 10px;
+
+            .practice_problems_left{
+                border-right: 2px solid $color;
+                padding: 10px 20px;
+                // height: 800px;
+                // overflow-y: scroll;
+
+                // style for scrollbar
+                &::-webkit-scrollbar {
+                    width: 6px;
+                    border-radius: 10px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
+                    backdrop-filter: blur(20px);
+                    border-radius: 10px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: linear-gradient(125.7deg,hsla(190,79%,70%,.65) 25.43%, hsla(190, 79%, 70%, .35) 74.38%);
+                    border-radius: 10px;
+                }
+
+                .header{
+                    margin-bottom: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    h2{
+                        @include heading1(1.8rem);
+                    }
+
+                    .cls-btn{
+                        font-family: $font-family;
+                        font-size: 1rem;
+                        font-weight: 500;
+                        color: #ffffff;
+                        background: linear-gradient(125.7deg,hsla(190,79%,70%,.65) 25.43%, hsla(190, 79%, 70%, .35) 74.38%);
+                        padding: 5px 10px;
+                        border-radius: 7px;
+                        transition:  0.2s ease-in-out;
+
+                        &:hover{
+                            transform: scale(1.04);
+                        }
+                    }
+                }
+
+                .filters{
+                    .filter{
+                        margin-bottom: 20px;
+
+                        h3{
+                            @include heading1(1.4rem);
+                        }
+                    }
+                }
+            }
+
+            .practice_problems_right{
+                padding: 10px 20px;
+
+                .practice_search{
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 30px;
+
+                    .search{
+                        width: 60%;
+
+                        label{
+                            font-family: $font-family;
+                            font-size: 1.2rem;
+                            font-weight: 500;
+                            color: #3b87ce;
+                        }
+    
+                        input{
+                            font-family: $font-family;
+                            font-size: 1.2rem;
+                            font-weight: 500;
+                            background: linear-gradient(125.7deg,hsla(0,0%,100%,.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
+                            backdrop-filter: blur(20px);
+                            color: #ffffff;
+                            border-radius: 10px;
+                        }
+                    }
+                }
+
+                .practice_problems_list{
+                    margin-top: 20px;
+
+                    .table, td{
+                        border: none !important;
+
+                        th{
+                            @include heading1(1.5rem);
+                        }
+
+                        td{
+                            @include paragraph(1rem);
+                            color: #ffffff;
+                        }
+
+                        tr:nth-child(even){
+                            background: linear-gradient(125.7deg,hsla(0, 0%, 61%, 0.15) 25.43%,hsla(0,0%,100%,.05) 74.38%);
+                            backdrop-filter: blur(10px);
+                        }
+                    }
+
+                    .table_pagination{
+                        @include paragraph(1.2rem);
+                        color: #ffffff;
+                    }
+                }
+            }
+
+            @media screen and (max-width: 1024px){
+
+                .practice_problems_left{
+                    .header{
+                        h2{
+                            font-size: 1.5rem;
+                        }
+
+                        .cls-btn{
+                            font-size: 0.8rem;
+                        }
+                    }
+                }
+            }
+
+            @media screen and (max-width: 960px){
+                display: block;
+
+                .practice_problems_left{
+                    border: none;
+
+                    .filters{
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                    }
+                }
+
+                .practice_problems_right{
+                    width: 100%;
+
+                    .practice_search{
+                        width: 100%;
+
+                        .search{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
         }
     }
 }
